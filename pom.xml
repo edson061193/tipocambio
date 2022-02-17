@@ -61,6 +61,20 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex.rxjava2</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>2.2.10</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava-reactive-streams</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
