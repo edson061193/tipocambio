@@ -47,7 +47,7 @@ public class TypeChangeController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Single<ResponseEntity<BaseWebResponse<List<TypeResponse>>>> getAllBooks(
+    public Single<ResponseEntity<BaseWebResponse<List<TypeResponse>>>> getAll(
             @RequestParam(value = "limit", defaultValue = "5") int limit, @RequestParam(value = "page", defaultValue = "0") int page) {
 
         return typeChangeService.getAll(limit, page)
@@ -56,14 +56,14 @@ public class TypeChangeController {
     }
 
     @GetMapping(value = "/{idTypeChange}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Single<ResponseEntity<BaseWebResponse<TypeResponse>>> getBookDetail(@PathVariable(value = "idTypeChange") Long idTypeChange) {
+    public Single<ResponseEntity<BaseWebResponse<TypeResponse>>> getDetail(@PathVariable(value = "idTypeChange") Long idTypeChange) {
         return typeChangeService.getDetail(idTypeChange)
                 .subscribeOn(Schedulers.io())
                 .map(typeChange -> ResponseEntity.ok(BaseWebResponse.successWithData(toDtoTypeResponse(typeChange))));
     }
 
     @DeleteMapping(value = "/{idType}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Single<ResponseEntity<BaseWebResponse>> deleteBook(@PathVariable(value = "idType") Long idType) {
+    public Single<ResponseEntity<BaseWebResponse>> delete(@PathVariable(value = "idType") Long idType) {
         return typeChangeService.delete(idType)
                 .subscribeOn(Schedulers.io())
                 .toSingle(() -> ResponseEntity.ok(BaseWebResponse.successNoData()));
