@@ -9,6 +9,7 @@ import com.edsuarez.tipocambio.dto.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,22 +20,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class UserController {
 
     @PostMapping("user")
-    public User login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
-        String token = getJWTToken(username);
-        User user = new User();
-        user.setUser(username);
+    public User login(@RequestBody User user) {
+        String token = getJWTToken(user.getUser());
+        user.setUser(user.getUser());
         user.setToken(token);
         return user;
-
     }
 
     private String getJWTToken(String username) {
-        String secretKey = "mySecretKey";
+        String secretKey = "edSecretKeys";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 
         String token = Jwts
                 .builder()
-                .setId("softtekJWT")
+                .setId("HashJWT")
                 .setSubject(username)
                 .claim("authorities",
                         grantedAuthorities.stream()

@@ -33,6 +33,7 @@ private TypeChangeRepository typeChangeRepository;
             if (typeChange.isPresent())
                 singleSubscriber.onError(new EntityExistsException());
             else {
+                type.setLastUpdate(LocalDateTime.now());
                 Long idTypeChange = typeChangeRepository.save(type).getId();
                 singleSubscriber.onSuccess(String.valueOf(idTypeChange));
             }
